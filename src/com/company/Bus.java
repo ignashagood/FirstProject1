@@ -67,7 +67,7 @@ public class Bus {
         return occupiedSeats == 0;
     }
 
-    public int calculateProfit() {
+    private int calculateProfit() {
         return occupiedSeats * ticketPrice;
     }
 
