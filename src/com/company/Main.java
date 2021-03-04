@@ -4,13 +4,16 @@ public class Main {
 
     public static void main(String[] args) {
         int x;
-        Bus Bus1 = new Bus(54, 400, 25);
-        Bus Bus2 = new Bus(45, 500, 30);
-        if (Bus1.isFull == true)
+        Bus bus1 = new Bus(54, 400, 30);
+        Bus bus2 = new Bus(45, 500, 20);
+        if (bus1.isFull())
+            System.out.println("Автобус полон!");
+        if (bus2.isEmpty())
+            System.out.println("Автобус пуст!");
 
         System.out.print("Для первого автобуса ");
-        Bus1.profitability();
+        bus1.defineProfitability();
         System.out.print("Для второго автобуса ");
-        Bus2.profitability();
+        bus2.defineProfitability();
     }
 }
