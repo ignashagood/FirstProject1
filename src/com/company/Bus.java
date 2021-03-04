@@ -1,6 +1,8 @@
 package com.company;
 
 public class Bus {
+    private static final int RENT_COEFF = 11000;
+
     private int numberBus;
     private int numberSeats;
     private int ticketPrice;
@@ -9,15 +11,16 @@ public class Bus {
     public Bus() {
     }
 
-    public Bus(int numberBus, int numberSeats, int ticketPrice, int occupiedSeats) {
+    public Bus(int numberBus, int numberSeats, int ticketPrice) {
         this.numberBus = numberBus;
         this.numberSeats = numberSeats;
         this.ticketPrice = ticketPrice;
-        this.occupiedSeats = occupiedSeats;
     }
 
     public Bus copy() {
-        return new Bus(numberBus, numberSeats, ticketPrice, occupiedSeats);
+        Bus copiedBus = new Bus(numberBus, numberSeats, ticketPrice);
+        copiedBus.setOccupiedSeats(getOccupiedSeats());
+        return copiedBus;
     }
 
     public int getNumberBus() {
@@ -57,7 +60,7 @@ public class Bus {
     }
 
     public boolean isFull() {
-        return occupiedSeats == numberSeats;
+        return occupiedSeats >= numberSeats;
     }
 
     public boolean isEmpty() {
@@ -68,20 +71,16 @@ public class Bus {
         return occupiedSeats * ticketPrice;
     }
 
-    public void defineProfitability() {
-        if (occupiedSeats * ticketPrice > 11000)
-            System.out.println("поездка рентабельна");
-        if (occupiedSeats * ticketPrice <= 11000)
-            System.out.println("поездка не рентабельна");
+    public boolean isProfitable() {
+        return calculateProfit() > RENT_COEFF;
     }
 
     @Override
     public String toString() {
-        return "Bus{" +
-                "numberBus=" + numberBus +
-                ", numberSeats=" + numberSeats +
-                ", ticketPrice=" + ticketPrice +
-                ", occupiedSeats=" + occupiedSeats +
-                '}';
+        return "Автобус " +
+                "номер " + numberBus +
+                ": количество мест - " + numberSeats +
+                ", цена билета - " + ticketPrice +
+                ", количество занятых мест - " + occupiedSeats;
     }
 }
